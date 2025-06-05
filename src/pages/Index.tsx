@@ -98,15 +98,15 @@ const Index = () => {
           
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
             {[
-              { name: "Drops", count: "8 products", color: "bg-blue-500" },
-              { name: "Syrups", count: "13 products", color: "bg-green-500" },
-              { name: "Sachets", count: "5 products", color: "bg-yellow-500" },
-              { name: "Tablets", count: "8 products", color: "bg-purple-500" },
-              { name: "Jar", count: "1 product", color: "bg-orange-500" },
+              { name: "Drops", count: "8 products", color: "bg-gradient-to-br from-blue-500 to-blue-600" },
+              { name: "Syrups", count: "13 products", color: "bg-gradient-to-br from-green-500 to-green-600" },
+              { name: "Sachets", count: "5 products", color: "bg-gradient-to-br from-indigo-500 to-indigo-600" },
+              { name: "Tablets", count: "8 products", color: "bg-gradient-to-br from-purple-500 to-purple-600" },
+              { name: "Jar", count: "1 product", color: "bg-gradient-to-br from-orange-500 to-orange-600" },
             ].map((category) => (
               <Card key={category.name} className="text-center p-6 card-hover cursor-pointer">
                 <CardContent className="pt-6">
-                  <div className={`w-16 h-16 ${category.color} rounded-full mx-auto mb-4 flex items-center justify-center`}>
+                  <div className={`w-16 h-16 ${category.color} rounded-full mx-auto mb-4 flex items-center justify-center shadow-lg`}>
                     <span className="text-white font-bold text-lg">{category.name[0]}</span>
                   </div>
                   <h3 className="font-semibold text-lg mb-1">{category.name}</h3>
