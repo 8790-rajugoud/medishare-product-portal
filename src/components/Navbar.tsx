@@ -2,17 +2,13 @@
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Menu, X, ShoppingCart } from "lucide-react";
-import { useCart } from "@/hooks/useCart";
+import { Menu, X, Phone, Mail } from "lucide-react";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
-  const { cartItems } = useCart();
 
   const isActive = (path: string) => location.pathname === path;
-
-  const cartItemCount = cartItems.reduce((sum, item) => sum + item.quantity, 0);
 
   return (
     <nav className="bg-white shadow-lg sticky top-0 z-50">
@@ -59,30 +55,14 @@ const Navbar = () => {
             >
               Contact
             </Link>
-            <Link to="/cart" className="relative">
-              <Button variant="outline" size="sm" className="relative">
-                <ShoppingCart className="h-4 w-4" />
-                {cartItemCount > 0 && (
-                  <span className="absolute -top-2 -right-2 bg-medical-600 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
-                    {cartItemCount}
-                  </span>
-                )}
-              </Button>
-            </Link>
+            <div className="flex items-center space-x-2 text-sm text-gray-600">
+              <Phone className="h-4 w-4" />
+              <span>+91 99999 99999</span>
+            </div>
           </div>
 
           {/* Mobile menu button */}
-          <div className="md:hidden flex items-center space-x-2">
-            <Link to="/cart" className="relative">
-              <Button variant="outline" size="sm" className="relative">
-                <ShoppingCart className="h-4 w-4" />
-                {cartItemCount > 0 && (
-                  <span className="absolute -top-2 -right-2 bg-medical-600 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
-                    {cartItemCount}
-                  </span>
-                )}
-              </Button>
-            </Link>
+          <div className="md:hidden flex items-center">
             <button
               onClick={() => setIsOpen(!isOpen)}
               className="text-gray-700 hover:text-medical-600 focus:outline-none"
@@ -133,6 +113,10 @@ const Navbar = () => {
             >
               Contact
             </Link>
+            <div className="px-3 py-2 flex items-center space-x-2 text-sm text-gray-600">
+              <Phone className="h-4 w-4" />
+              <span>+91 99999 99999</span>
+            </div>
           </div>
         </div>
       )}

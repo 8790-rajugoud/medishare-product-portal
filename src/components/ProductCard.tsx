@@ -2,10 +2,8 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { ShoppingCart, Info, Heart, Star, Package, Users, Clock } from "lucide-react";
+import { Info, Star, Package, Users, Clock, Calendar, Shield, Thermometer } from "lucide-react";
 import { Product } from "@/data/products";
-import { useCart } from "@/hooks/useCart";
-import { useToast } from "@/hooks/use-toast";
 import { useState } from "react";
 
 interface ProductCardProps {
@@ -13,25 +11,8 @@ interface ProductCardProps {
 }
 
 const ProductCard = ({ product }: ProductCardProps) => {
-  const { addToCart } = useCart();
-  const { toast } = useToast();
   const [isHovered, setIsHovered] = useState(false);
-  const [isFavorite, setIsFavorite] = useState(false);
   const [showDetails, setShowDetails] = useState(false);
-
-  const handleAddToCart = () => {
-    addToCart({
-      id: product.id,
-      name: product.name,
-      category: product.category,
-      size: product.size,
-      price: product.price,
-    });
-    toast({
-      title: "Added to Cart",
-      description: `${product.name} has been added to your cart.`,
-    });
-  };
 
   const getCategoryColor = (category: string) => {
     switch (category) {
@@ -61,17 +42,12 @@ const ProductCard = ({ product }: ProductCardProps) => {
         </div>
       )}
 
-      {/* Favorite button */}
-      <button
-        onClick={() => setIsFavorite(!isFavorite)}
-        className="absolute top-3 right-3 z-10 p-2 rounded-full bg-white/80 backdrop-blur-sm shadow-lg transition-all duration-300 hover:bg-white hover:scale-110"
-      >
-        <Heart 
-          className={`h-4 w-4 transition-colors duration-300 ${
-            isFavorite ? 'fill-red-500 text-red-500' : 'text-gray-400 hover:text-red-500'
-          }`} 
-        />
-      </button>
+      {/* Batch number */}
+      <div className="absolute top-3 right-3 z-10">
+        <Badge variant="outline" className="text-xs bg-white/80 backdrop-blur-sm">
+          {product.batchNumber}
+        </Badge>
+      </div>
 
       <CardHeader className="p-4 relative">
         <div className="aspect-square relative overflow-hidden rounded-xl bg-gradient-to-br from-gray-100 to-gray-200 group-hover:shadow-lg transition-all duration-500">
@@ -82,7 +58,7 @@ const ProductCard = ({ product }: ProductCardProps) => {
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
           
-          {/* Quick view overlay */}
+          {/* Product info overlay */}
           <div className={`absolute inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center transition-all duration-300 ${
             showDetails ? 'opacity-100' : 'opacity-0 pointer-events-none'
           }`}>
@@ -97,7 +73,10 @@ const ProductCard = ({ product }: ProductCardProps) => {
                   <span>{product.size}</span>
                 </div>
               </div>
-              <p className="text-xs opacity-90">{product.dosage}</p>
+              <div className="flex items-center justify-center space-x-1 text-sm">
+                <Calendar className="h-4 w-4" />
+                <span>Exp: {product.expiryDate}</span>
+              </div>
             </div>
           </div>
         </div>
@@ -107,7 +86,7 @@ const ProductCard = ({ product }: ProductCardProps) => {
           {[...Array(5)].map((_, i) => (
             <Star key={i} className="h-3 w-3 fill-yellow-400 text-yellow-400" />
           ))}
-          <span className="text-xs text-gray-500 ml-1">(4.8)</span>
+          <span className="text-xs text-gray-500 ml-1">(5.0)</span>
         </div>
       </CardHeader>
 
@@ -116,7 +95,10 @@ const ProductCard = ({ product }: ProductCardProps) => {
           <Badge className={getCategoryColor(product.category)} variant="secondary">
             {product.category}
           </Badge>
-          <span className="text-sm text-gray-500 font-medium">{product.size}</span>
+          <div className="text-xs text-gray-500 flex items-center space-x-1">
+            <Package className="h-3 w-3" />
+            <span>{product.packagingType.split(' ')[0]}</span>
+          </div>
         </div>
 
         <div>
@@ -128,12 +110,19 @@ const ProductCard = ({ product }: ProductCardProps) => {
           {/* Manufacturer */}
           <p className="text-xs text-gray-500 mb-2">by {product.manufacturer}</p>
           
+          {/* Therapeutic class */}
+          <div className="mb-3">
+            <span className="text-xs bg-medical-50 text-medical-700 px-2 py-1 rounded-full border border-medical-200">
+              {product.therapeuticClass}
+            </span>
+          </div>
+          
           {/* Key uses */}
           <div className="flex flex-wrap gap-1 mb-3">
             {product.uses.slice(0, 2).map((use, index) => (
               <span
                 key={index}
-                className="text-xs bg-medical-50 text-medical-700 px-2 py-1 rounded-full border border-medical-200"
+                className="text-xs bg-gray-100 text-gray-700 px-2 py-1 rounded-full border"
               >
                 {use}
               </span>
@@ -146,21 +135,21 @@ const ProductCard = ({ product }: ProductCardProps) => {
 
         <div className="flex items-center justify-between">
           <div className="text-2xl font-bold text-medical-600">₹{product.price}</div>
-          <div className="text-xs text-gray-500">
-            <Clock className="h-3 w-3 inline mr-1" />
-            Fast delivery
+          <div className="text-xs text-gray-500 flex items-center space-x-1">
+            <Shield className="h-3 w-3" />
+            <span>Quality Assured</span>
           </div>
         </div>
       </CardContent>
 
       <CardFooter className="p-4 pt-0 space-y-2">
         <div className="flex gap-2 w-full">
-          <Button
-            onClick={handleAddToCart}
-            className="flex-1 medical-gradient text-white hover:opacity-90 transition-all duration-300 hover:shadow-lg group-hover:shadow-xl"
+          <Button 
+            variant="outline" 
+            className="flex-1 hover:bg-medical-50 hover:border-medical-300 transition-all duration-300"
           >
-            <ShoppingCart className="h-4 w-4 mr-2" />
-            Add to Cart
+            <Info className="h-4 w-4 mr-2" />
+            View Details
           </Button>
           <Button 
             variant="outline" 
@@ -178,20 +167,29 @@ const ProductCard = ({ product }: ProductCardProps) => {
         }`}>
           <div className="bg-gray-50 rounded-lg p-3 text-xs space-y-2 border border-gray-200">
             <div>
-              <strong className="text-medical-700">Ingredients:</strong>
-              <p className="text-gray-600">{product.ingredients.join(', ')}</p>
-            </div>
-            <div>
-              <strong className="text-medical-700">Uses:</strong>
-              <p className="text-gray-600">{product.uses.join(', ')}</p>
+              <strong className="text-medical-700">Composition:</strong>
+              <p className="text-gray-600">{product.composition}</p>
             </div>
             <div>
               <strong className="text-medical-700">Dosage:</strong>
               <p className="text-gray-600">{product.dosage}</p>
             </div>
             <div>
-              <strong className="text-medical-700">Age Group:</strong>
-              <p className="text-gray-600">{product.ageGroup}</p>
+              <strong className="text-medical-700">Storage:</strong>
+              <p className="text-gray-600 flex items-center">
+                <Thermometer className="h-3 w-3 mr-1" />
+                {product.storageConditions}
+              </p>
+            </div>
+            <div>
+              <strong className="text-medical-700">Packaging:</strong>
+              <p className="text-gray-600">{product.packagingType}</p>
+            </div>
+            <div>
+              <strong className="text-medical-700">Batch:</strong>
+              <span className="text-gray-600 ml-1">{product.batchNumber}</span>
+              <strong className="text-medical-700 ml-3">Expiry:</strong>
+              <span className="text-gray-600 ml-1">{product.expiryDate}</span>
             </div>
           </div>
         </div>
