@@ -2,7 +2,7 @@
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Menu, X, Phone, Mail } from "lucide-react";
+import { Menu, X } from "lucide-react";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -55,10 +55,6 @@ const Navbar = () => {
             >
               Contact
             </Link>
-            <div className="flex items-center space-x-2 text-sm text-gray-600">
-              <Phone className="h-4 w-4" />
-              <span>+91 99999 99999</span>
-            </div>
           </div>
 
           {/* Mobile menu button */}
@@ -113,10 +109,6 @@ const Navbar = () => {
             >
               Contact
             </Link>
-            <div className="px-3 py-2 flex items-center space-x-2 text-sm text-gray-600">
-              <Phone className="h-4 w-4" />
-              <span>+91 99999 99999</span>
-            </div>
           </div>
         </div>
       )}
