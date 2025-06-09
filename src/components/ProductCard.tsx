@@ -2,7 +2,7 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Info, Star, Package, Users, Clock, Calendar, Shield, Thermometer } from "lucide-react";
+import { Star, Package, Users, Calendar, Shield, Thermometer } from "lucide-react";
 import { Product } from "@/data/products";
 import { useState } from "react";
 
@@ -25,13 +25,18 @@ const ProductCard = ({ product }: ProductCardProps) => {
     }
   };
 
+  const handleCardClick = () => {
+    setShowDetails(!showDetails);
+  };
+
   return (
     <Card 
       className={`group relative overflow-hidden transition-all duration-500 hover:shadow-2xl hover:-translate-y-2 ${
         isHovered ? 'scale-105' : ''
-      } bg-gradient-to-br from-white via-gray-50 to-white border-2 hover:border-medical-300`}
+      } advanced-card cursor-pointer ${showDetails ? 'glow-blue-intense' : 'glow-blue'}`}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
+      onClick={handleCardClick}
     >
       {/* Stock indicator */}
       {product.inStock && (
@@ -58,9 +63,9 @@ const ProductCard = ({ product }: ProductCardProps) => {
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
           
-          {/* Product info overlay */}
+          {/* Product info overlay on hover */}
           <div className={`absolute inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center transition-all duration-300 ${
-            showDetails ? 'opacity-100' : 'opacity-0 pointer-events-none'
+            isHovered && !showDetails ? 'opacity-100' : 'opacity-0 pointer-events-none'
           }`}>
             <div className="text-white text-center p-4 space-y-2">
               <div className="flex items-center justify-center space-x-4 text-sm">
@@ -77,6 +82,7 @@ const ProductCard = ({ product }: ProductCardProps) => {
                 <Calendar className="h-4 w-4" />
                 <span>Exp: {product.expiryDate}</span>
               </div>
+              <p className="text-xs mt-2 opacity-80">Click to view full details</p>
             </div>
           </div>
         </div>
@@ -102,7 +108,7 @@ const ProductCard = ({ product }: ProductCardProps) => {
         </div>
 
         <div>
-          <h3 className="font-bold text-lg mb-2 text-gray-900 group-hover:text-medical-600 transition-colors duration-300">
+          <h3 className="font-bold text-lg mb-2 text-gray-900 group-hover:text-blue-600 transition-colors duration-300">
             {product.name}
           </h3>
           <p className="text-gray-600 text-sm mb-2 line-clamp-2">{product.description}</p>
@@ -112,7 +118,7 @@ const ProductCard = ({ product }: ProductCardProps) => {
           
           {/* Therapeutic class */}
           <div className="mb-3">
-            <span className="text-xs bg-medical-50 text-medical-700 px-2 py-1 rounded-full border border-medical-200">
+            <span className="text-xs bg-blue-50 text-blue-700 px-2 py-1 rounded-full border border-blue-200">
               {product.therapeuticClass}
             </span>
           </div>
@@ -133,71 +139,74 @@ const ProductCard = ({ product }: ProductCardProps) => {
           </div>
         </div>
 
-        <div className="flex items-center justify-between">
-          <div className="text-2xl font-bold text-medical-600">₹{product.price}</div>
+        <div className="flex items-center justify-center">
           <div className="text-xs text-gray-500 flex items-center space-x-1">
             <Shield className="h-3 w-3" />
-            <span>Quality Assured</span>
+            <span>Quality Assured & Certified</span>
           </div>
         </div>
       </CardContent>
 
       <CardFooter className="p-4 pt-0 space-y-2">
-        <div className="flex gap-2 w-full">
-          <Button 
-            variant="outline" 
-            className="flex-1 hover:bg-medical-50 hover:border-medical-300 transition-all duration-300"
-          >
-            <Info className="h-4 w-4 mr-2" />
-            View Details
-          </Button>
-          <Button 
-            variant="outline" 
-            size="sm"
-            onClick={() => setShowDetails(!showDetails)}
-            className="hover:bg-medical-50 hover:border-medical-300 transition-all duration-300"
-          >
-            <Info className="h-4 w-4" />
-          </Button>
-        </div>
-        
-        {/* Detailed info toggle */}
+        {/* Detailed info section */}
         <div className={`w-full overflow-hidden transition-all duration-500 ${
           showDetails ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
         }`}>
-          <div className="bg-gray-50 rounded-lg p-3 text-xs space-y-2 border border-gray-200">
-            <div>
-              <strong className="text-medical-700">Composition:</strong>
-              <p className="text-gray-600">{product.composition}</p>
+          <div className="pharma-gradient-glass rounded-lg p-4 text-xs space-y-3 border border-blue-200">
+            <div className="text-center mb-3">
+              <h4 className="font-semibold text-blue-700 text-sm">Complete Product Information</h4>
             </div>
+            
             <div>
-              <strong className="text-medical-700">Dosage:</strong>
-              <p className="text-gray-600">{product.dosage}</p>
+              <strong className="text-blue-700">Composition:</strong>
+              <p className="text-gray-600 mt-1">{product.composition}</p>
             </div>
+            
             <div>
-              <strong className="text-medical-700">Storage:</strong>
-              <p className="text-gray-600 flex items-center">
+              <strong className="text-blue-700">Dosage Instructions:</strong>
+              <p className="text-gray-600 mt-1">{product.dosage}</p>
+            </div>
+            
+            <div>
+              <strong className="text-blue-700">Storage Conditions:</strong>
+              <p className="text-gray-600 flex items-center mt-1">
                 <Thermometer className="h-3 w-3 mr-1" />
                 {product.storageConditions}
               </p>
             </div>
+            
             <div>
-              <strong className="text-medical-700">Packaging:</strong>
-              <p className="text-gray-600">{product.packagingType}</p>
+              <strong className="text-blue-700">Packaging Type:</strong>
+              <p className="text-gray-600 mt-1">{product.packagingType}</p>
             </div>
-            <div>
-              <strong className="text-medical-700">Batch:</strong>
-              <span className="text-gray-600 ml-1">{product.batchNumber}</span>
-              <strong className="text-medical-700 ml-3">Expiry:</strong>
-              <span className="text-gray-600 ml-1">{product.expiryDate}</span>
+            
+            <div className="grid grid-cols-2 gap-2 pt-2 border-t border-blue-200">
+              <div>
+                <strong className="text-blue-700">Batch:</strong>
+                <span className="text-gray-600 ml-1 text-xs">{product.batchNumber}</span>
+              </div>
+              <div>
+                <strong className="text-blue-700">Expiry:</strong>
+                <span className="text-gray-600 ml-1 text-xs">{product.expiryDate}</span>
+              </div>
+            </div>
+
+            <div className="text-center pt-2">
+              <p className="text-xs text-blue-600">Contact us for pricing and availability</p>
             </div>
           </div>
         </div>
+        
+        {!showDetails && (
+          <div className="w-full text-center">
+            <p className="text-xs text-gray-500">Click card for detailed information</p>
+          </div>
+        )}
       </CardFooter>
 
       {/* Animated border gradient */}
       <div className="absolute inset-0 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none">
-        <div className="absolute inset-0 rounded-lg bg-gradient-to-r from-medical-400 via-medical-500 to-medical-600 p-[2px]">
+        <div className="absolute inset-0 rounded-lg bg-gradient-to-r from-blue-400 via-blue-500 to-blue-600 p-[2px]">
           <div className="w-full h-full bg-white rounded-lg"></div>
         </div>
       </div>
