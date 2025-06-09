@@ -53,6 +53,19 @@ export default {
 					DEFAULT: 'hsl(var(--card))',
 					foreground: 'hsl(var(--card-foreground))'
 				},
+				pharma: {
+					50: '#eff6ff',
+					100: '#dbeafe',
+					200: '#bfdbfe',
+					300: '#93c5fd',
+					400: '#60a5fa',
+					500: '#3b82f6',
+					600: '#2563eb',
+					700: '#1d4ed8',
+					800: '#1e40af',
+					900: '#1e3a8a',
+					950: '#172554',
+				},
 				medical: {
 					50: '#f0f9ff',
 					100: '#e0f2fe',
@@ -64,6 +77,18 @@ export default {
 					700: '#0369a1',
 					800: '#075985',
 					900: '#0c4a6e',
+				},
+				cyber: {
+					50: '#faf5ff',
+					100: '#f3e8ff',
+					200: '#e9d5ff',
+					300: '#d8b4fe',
+					400: '#c084fc',
+					500: '#a855f7',
+					600: '#9333ea',
+					700: '#7c3aed',
+					800: '#6d28d9',
+					900: '#581c87',
 				},
 				sidebar: {
 					DEFAULT: 'hsl(var(--sidebar-background))',
@@ -79,11 +104,29 @@ export default {
 			fontFamily: {
 				sans: ['Poppins', 'Inter', 'system-ui', 'sans-serif'],
 				poppins: ['Poppins', 'sans-serif'],
+				display: ['Poppins', 'sans-serif'],
+			},
+			fontSize: {
+				'display-xl': ['4.5rem', { lineHeight: '1', letterSpacing: '-0.02em' }],
+				'display-lg': ['3.75rem', { lineHeight: '1', letterSpacing: '-0.02em' }],
+				'display-md': ['3rem', { lineHeight: '1.1', letterSpacing: '-0.02em' }],
 			},
 			borderRadius: {
 				lg: 'var(--radius)',
 				md: 'calc(var(--radius) - 2px)',
-				sm: 'calc(var(--radius) - 4px)'
+				sm: 'calc(var(--radius) - 4px)',
+				xl: '1rem',
+				'2xl': '1.5rem',
+				'3xl': '2rem',
+			},
+			animation: {
+				'accordion-down': 'accordion-down 0.2s ease-out',
+				'accordion-up': 'accordion-up 0.2s ease-out',
+				'fade-in': 'fade-in 0.3s ease-out',
+				'floating-advanced': 'floatingAdvanced 4s ease-in-out infinite',
+				'pulse-advanced': 'pulseAdvanced 3s infinite',
+				'fade-in-advanced': 'fadeInAdvanced 0.8s ease-out',
+				'slide-in-advanced': 'slideInAdvanced 0.6s ease-out',
 			},
 			keyframes: {
 				'accordion-down': {
@@ -113,10 +156,13 @@ export default {
 					}
 				}
 			},
-			animation: {
-				'accordion-down': 'accordion-down 0.2s ease-out',
-				'accordion-up': 'accordion-up 0.2s ease-out',
-				'fade-in': 'fade-in 0.3s ease-out',
+			backdropBlur: {
+				xs: '2px',
+			},
+			boxShadow: {
+				'glow': '0 0 20px rgba(59, 130, 246, 0.15)',
+				'glow-lg': '0 0 30px rgba(59, 130, 246, 0.2)',
+				'glow-xl': '0 0 40px rgba(59, 130, 246, 0.25)',
 			}
 		}
 	},

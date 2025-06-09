@@ -5,7 +5,7 @@
 
 @layer base {
   :root {
-    --background: 255 255 255;
+    --background: 248 250 252;
     --foreground: 15 23 42;
 
     --card: 255 255 255;
@@ -14,16 +14,16 @@
     --popover: 255 255 255;
     --popover-foreground: 15 23 42;
 
-    --primary: 14 165 233;
+    --primary: 59 130 246;
     --primary-foreground: 255 255 255;
 
-    --secondary: 240 244 248;
+    --secondary: 241 245 249;
     --secondary-foreground: 15 23 42;
 
     --muted: 248 250 252;
     --muted-foreground: 100 116 139;
 
-    --accent: 240 244 248;
+    --accent: 241 245 249;
     --accent-foreground: 15 23 42;
 
     --destructive: 239 68 68;
@@ -31,18 +31,18 @@
 
     --border: 226 232 240;
     --input: 226 232 240;
-    --ring: 14 165 233;
+    --ring: 59 130 246;
 
-    --radius: 0.5rem;
+    --radius: 0.75rem;
 
     --sidebar-background: 255 255 255;
     --sidebar-foreground: 15 23 42;
-    --sidebar-primary: 14 165 233;
+    --sidebar-primary: 59 130 246;
     --sidebar-primary-foreground: 255 255 255;
-    --sidebar-accent: 240 244 248;
+    --sidebar-accent: 241 245 249;
     --sidebar-accent-foreground: 15 23 42;
     --sidebar-border: 226 232 240;
-    --sidebar-ring: 14 165 233;
+    --sidebar-ring: 59 130 246;
   }
 }
 
@@ -52,100 +52,193 @@
   }
 
   body {
-    @apply bg-background text-foreground font-poppins;
+    @apply bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50 text-foreground font-poppins;
+    min-height: 100vh;
   }
 }
 
 @layer utilities {
-  .medical-gradient {
-    background: linear-gradient(135deg, #0ea5e9 0%, #0284c7 50%, #0369a1 100%);
+  /* Advanced Gradient Schemes */
+  .pharma-gradient-primary {
+    background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 30%, #1e40af 60%, #1e3a8a 100%);
   }
   
-  .card-hover {
-    @apply transition-all duration-500 hover:shadow-2xl hover:-translate-y-2;
+  .pharma-gradient-secondary {
+    background: linear-gradient(135deg, #06b6d4 0%, #0891b2 30%, #0e7490 60%, #155e75 100%);
   }
   
-  .line-clamp-2 {
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
+  .pharma-gradient-accent {
+    background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 30%, #6d28d9 60%, #5b21b6 100%);
   }
   
-  .medical-glow {
-    box-shadow: 0 0 20px rgba(14, 165, 233, 0.3);
+  .pharma-gradient-success {
+    background: linear-gradient(135deg, #10b981 0%, #059669 30%, #047857 60%, #065f46 100%);
   }
   
-  .medical-glow-intense {
-    box-shadow: 0 0 30px rgba(14, 165, 233, 0.5);
+  .pharma-gradient-glass {
+    background: linear-gradient(135deg, rgba(255,255,255,0.25) 0%, rgba(255,255,255,0.1) 100%);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255,255,255,0.2);
   }
   
-  .floating-animation {
-    animation: float 3s ease-in-out infinite;
+  /* Advanced Card Styles */
+  .advanced-card {
+    @apply bg-white/80 backdrop-blur-sm border border-white/20 shadow-xl shadow-blue-100/50 hover:shadow-2xl hover:shadow-blue-200/60;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   }
   
-  .pulse-medical {
-    animation: pulse-medical 2s infinite;
+  .advanced-card:hover {
+    @apply -translate-y-3 bg-white/90;
+    transform: translateY(-12px) scale(1.02);
   }
   
-  .slide-in-left {
-    animation: slideInLeft 0.6s ease-out;
+  /* Modern Button Styles */
+  .btn-pharma-primary {
+    @apply pharma-gradient-primary text-white font-semibold px-8 py-4 rounded-xl shadow-lg shadow-blue-500/30 hover:shadow-xl hover:shadow-blue-500/40 transition-all duration-300;
   }
   
-  .slide-in-right {
-    animation: slideInRight 0.6s ease-out;
+  .btn-pharma-secondary {
+    @apply bg-white/10 backdrop-blur-sm border border-white/20 text-blue-600 font-semibold px-8 py-4 rounded-xl hover:bg-white/20 transition-all duration-300;
   }
   
-  .fade-in-up {
-    animation: fadeInUp 0.8s ease-out;
+  /* Advanced Hover Effects */
+  .card-advanced-hover {
+    @apply transition-all duration-500 ease-out hover:shadow-2xl hover:shadow-blue-200/40;
+    transform-style: preserve-3d;
   }
   
-  .stagger-animation {
-    animation: fadeInUp 0.8s ease-out;
+  .card-advanced-hover:hover {
+    transform: translateY(-8px) rotateX(5deg) rotateY(2deg);
   }
   
-  .stagger-animation:nth-child(1) { animation-delay: 0.1s; }
-  .stagger-animation:nth-child(2) { animation-delay: 0.2s; }
-  .stagger-animation:nth-child(3) { animation-delay: 0.3s; }
-  .stagger-animation:nth-child(4) { animation-delay: 0.4s; }
-  .stagger-animation:nth-child(5) { animation-delay: 0.5s; }
-  .stagger-animation:nth-child(6) { animation-delay: 0.6s; }
-  .stagger-animation:nth-child(7) { animation-delay: 0.7s; }
-  .stagger-animation:nth-child(8) { animation-delay: 0.8s; }
-  
-  .gradient-text {
-    background: linear-gradient(135deg, #0ea5e9, #0284c7, #0369a1);
+  /* Text Effects */
+  .text-gradient-primary {
+    background: linear-gradient(135deg, #3b82f6, #1d4ed8, #8b5cf6);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
   }
   
-  .medical-border-gradient {
+  .text-gradient-secondary {
+    background: linear-gradient(135deg, #06b6d4, #3b82f6, #8b5cf6);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  
+  /* Advanced Glows */
+  .glow-blue {
+    box-shadow: 0 0 30px rgba(59, 130, 246, 0.3), 0 0 60px rgba(59, 130, 246, 0.1);
+  }
+  
+  .glow-blue-intense {
+    box-shadow: 0 0 40px rgba(59, 130, 246, 0.5), 0 0 80px rgba(59, 130, 246, 0.2);
+  }
+  
+  .glow-purple {
+    box-shadow: 0 0 30px rgba(139, 92, 246, 0.3), 0 0 60px rgba(139, 92, 246, 0.1);
+  }
+  
+  /* Advanced Animations */
+  .floating-advanced {
+    animation: floatingAdvanced 4s ease-in-out infinite;
+  }
+  
+  .pulse-advanced {
+    animation: pulseAdvanced 3s infinite;
+  }
+  
+  .fade-in-advanced {
+    animation: fadeInAdvanced 0.8s ease-out;
+  }
+  
+  .slide-in-advanced {
+    animation: slideInAdvanced 0.6s ease-out;
+  }
+  
+  .stagger-advanced {
+    animation: fadeInAdvanced 0.8s ease-out;
+  }
+  
+  .stagger-advanced:nth-child(1) { animation-delay: 0.1s; }
+  .stagger-advanced:nth-child(2) { animation-delay: 0.2s; }
+  .stagger-advanced:nth-child(3) { animation-delay: 0.3s; }
+  .stagger-advanced:nth-child(4) { animation-delay: 0.4s; }
+  .stagger-advanced:nth-child(5) { animation-delay: 0.5s; }
+  .stagger-advanced:nth-child(6) { animation-delay: 0.6s; }
+  .stagger-advanced:nth-child(7) { animation-delay: 0.7s; }
+  .stagger-advanced:nth-child(8) { animation-delay: 0.8s; }
+  
+  /* Glass Morphism Effects */
+  .glass-card {
+    @apply pharma-gradient-glass rounded-2xl p-6;
+  }
+  
+  /* Advanced Borders */
+  .border-gradient {
     border: 2px solid transparent;
     background: linear-gradient(white, white) padding-box,
-                linear-gradient(135deg, #0ea5e9, #0284c7) border-box;
+                linear-gradient(135deg, #3b82f6, #8b5cf6, #06b6d4) border-box;
+  }
+  
+  /* Modern Spacing */
+  .section-padding {
+    @apply py-24 px-4 sm:px-6 lg:px-8;
+  }
+  
+  /* Typography Enhancements */
+  .heading-primary {
+    @apply text-5xl md:text-7xl font-bold text-gradient-primary mb-6;
+    text-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  }
+  
+  .heading-secondary {
+    @apply text-3xl md:text-5xl font-bold text-slate-800 mb-6;
+  }
+  
+  .text-advanced {
+    @apply text-lg text-slate-600 leading-relaxed;
   }
 }
 
-@keyframes float {
+@keyframes floatingAdvanced {
   0%, 100% {
-    transform: translateY(0px);
+    transform: translateY(0px) rotate(0deg);
+  }
+  25% {
+    transform: translateY(-10px) rotate(1deg);
   }
   50% {
-    transform: translateY(-10px);
+    transform: translateY(-15px) rotate(0deg);
+  }
+  75% {
+    transform: translateY(-5px) rotate(-1deg);
   }
 }
 
-@keyframes pulse-medical {
+@keyframes pulseAdvanced {
   0%, 100% {
-    box-shadow: 0 0 0 0 rgba(14, 165, 233, 0.7);
+    box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.7);
+    transform: scale(1);
   }
-  70% {
-    box-shadow: 0 0 0 10px rgba(14, 165, 233, 0);
+  50% {
+    box-shadow: 0 0 0 20px rgba(59, 130, 246, 0);
+    transform: scale(1.05);
   }
 }
 
-@keyframes slideInLeft {
+@keyframes fadeInAdvanced {
+  from {
+    opacity: 0;
+    transform: translateY(40px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes slideInAdvanced {
   from {
     opacity: 0;
     transform: translateX(-100px);
@@ -156,65 +249,22 @@
   }
 }
 
-@keyframes slideInRight {
-  from {
-    opacity: 0;
-    transform: translateX(100px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes shimmer {
-  0% {
-    background-position: -200% 0;
-  }
-  100% {
-    background-position: 200% 0;
-  }
-}
-
-.shimmer {
-  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
-  background-size: 200% 100%;
-  animation: shimmer 1.5s infinite;
-}
-
-/* Advanced hover effects for buttons */
-.btn-glow:hover {
-  box-shadow: 0 0 20px rgba(14, 165, 233, 0.6);
-  transform: translateY(-2px);
-}
-
-/* Particle animation for hero section */
-.particles {
+/* Particle System */
+.particles-advanced {
   position: absolute;
   width: 100%;
   height: 100%;
   overflow: hidden;
 }
 
-.particle {
+.particle-advanced {
   position: absolute;
-  background: rgba(255, 255, 255, 0.1);
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(139, 92, 246, 0.1));
   border-radius: 50%;
-  animation: particle-float 6s infinite ease-in-out;
+  animation: particleFloat 8s infinite ease-in-out;
 }
 
-@keyframes particle-float {
+@keyframes particleFloat {
   0%, 100% {
     transform: translateY(0) rotate(0deg);
     opacity: 0;
@@ -223,6 +273,21 @@
     opacity: 1;
   }
   50% {
-    transform: translateY(-100px) rotate(180deg);
+    transform: translateY(-200px) rotate(180deg);
+  }
+}
+
+/* Responsive Design Improvements */
+@media (max-width: 768px) {
+  .heading-primary {
+    @apply text-4xl;
+  }
+  
+  .heading-secondary {
+    @apply text-2xl;
+  }
+  
+  .section-padding {
+    @apply py-16 px-4;
   }
 }
