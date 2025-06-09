@@ -2,7 +2,7 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Star, Package, Users, Calendar, Shield, Thermometer } from "lucide-react";
+import { Star, Package, Users, Calendar, Shield, Thermometer, ChevronDown, ChevronUp } from "lucide-react";
 import { Product } from "@/data/products";
 import { useState } from "react";
 
@@ -11,7 +11,6 @@ interface ProductCardProps {
 }
 
 const ProductCard = ({ product }: ProductCardProps) => {
-  const [isHovered, setIsHovered] = useState(false);
   const [showDetails, setShowDetails] = useState(false);
 
   const getCategoryColor = (category: string) => {
@@ -31,11 +30,9 @@ const ProductCard = ({ product }: ProductCardProps) => {
 
   return (
     <Card 
-      className={`group relative overflow-hidden transition-all duration-500 hover:shadow-2xl hover:-translate-y-2 ${
-        isHovered ? 'scale-105' : ''
-      } advanced-card cursor-pointer ${showDetails ? 'glow-blue-intense' : 'glow-blue'}`}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
+      className={`group relative overflow-hidden transition-all duration-500 hover:shadow-2xl hover:-translate-y-2 advanced-card cursor-pointer ${
+        showDetails ? 'glow-blue-intense' : 'glow-blue'
+      }`}
       onClick={handleCardClick}
     >
       {/* Stock indicator */}
@@ -54,6 +51,15 @@ const ProductCard = ({ product }: ProductCardProps) => {
         </Badge>
       </div>
 
+      {/* Click indicator */}
+      <div className="absolute top-1/2 right-4 transform -translate-y-1/2 z-10 bg-white/90 backdrop-blur-sm rounded-full p-2 shadow-lg group-hover:scale-110 transition-all duration-300">
+        {showDetails ? (
+          <ChevronUp className="h-5 w-5 text-blue-600" />
+        ) : (
+          <ChevronDown className="h-5 w-5 text-blue-600" />
+        )}
+      </div>
+
       <CardHeader className="p-4 relative">
         <div className="aspect-square relative overflow-hidden rounded-xl bg-gradient-to-br from-gray-100 to-gray-200 group-hover:shadow-lg transition-all duration-500">
           <img
@@ -62,29 +68,6 @@ const ProductCard = ({ product }: ProductCardProps) => {
             className="object-cover w-full h-full transition-transform duration-700 group-hover:scale-110"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-          
-          {/* Product info overlay on hover */}
-          <div className={`absolute inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center transition-all duration-300 ${
-            isHovered && !showDetails ? 'opacity-100' : 'opacity-0 pointer-events-none'
-          }`}>
-            <div className="text-white text-center p-4 space-y-2">
-              <div className="flex items-center justify-center space-x-4 text-sm">
-                <div className="flex items-center space-x-1">
-                  <Users className="h-4 w-4" />
-                  <span>{product.ageGroup}</span>
-                </div>
-                <div className="flex items-center space-x-1">
-                  <Package className="h-4 w-4" />
-                  <span>{product.size}</span>
-                </div>
-              </div>
-              <div className="flex items-center justify-center space-x-1 text-sm">
-                <Calendar className="h-4 w-4" />
-                <span>Exp: {product.expiryDate}</span>
-              </div>
-              <p className="text-xs mt-2 opacity-80">Click to view full details</p>
-            </div>
-          </div>
         </div>
 
         {/* Rating stars */}
@@ -148,7 +131,7 @@ const ProductCard = ({ product }: ProductCardProps) => {
       </CardContent>
 
       <CardFooter className="p-4 pt-0 space-y-2">
-        {/* Detailed info section */}
+        {/* Detailed info section - only shows when clicked */}
         <div className={`w-full overflow-hidden transition-all duration-500 ${
           showDetails ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
         }`}>
@@ -197,9 +180,12 @@ const ProductCard = ({ product }: ProductCardProps) => {
           </div>
         </div>
         
+        {/* Clear instruction when details are hidden */}
         {!showDetails && (
           <div className="w-full text-center">
-            <p className="text-xs text-gray-500">Click card for detailed information</p>
+            <p className="text-xs text-gray-500 bg-blue-50 px-3 py-2 rounded-lg border border-blue-200">
+              Click anywhere on the card to view detailed information
+            </p>
           </div>
         )}
       </CardFooter>
