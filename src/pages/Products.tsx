@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -77,7 +76,7 @@ const Products = () => {
         
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="text-center fade-in-advanced">
-            <h1 className="heading-primary text-white mb-8">Our Premium Products</h1>
+            <h1 className="text-5xl md:text-7xl font-bold text-white mb-8 drop-shadow-lg">Our Premium Products</h1>
             <div className="max-w-4xl mx-auto mb-12">
               <p className="text-2xl text-white/90 mb-6 font-light leading-relaxed">
                 Comprehensive range of high-quality pharmaceutical products designed for 
