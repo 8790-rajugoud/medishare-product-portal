@@ -173,7 +173,7 @@ const Contact = () => {
                       value={formData.name}
                       onChange={handleChange}
                       placeholder="Your full name"
-                      className="h-14 text-lg border-2 border-purple-200 focus:border-purple-500 rounded-xl transition-all duration-300 focus:ring-4 focus:ring-purple-500/20"
+                      className="h-14 text-lg border-2 border-slate-200 focus:border-purple-500 bg-white hover:bg-purple-50/50 rounded-xl transition-all duration-300 focus:ring-4 focus:ring-purple-500/20 placeholder:text-slate-400"
                     />
                   </div>
 
@@ -189,7 +189,7 @@ const Contact = () => {
                       value={formData.email}
                       onChange={handleChange}
                       placeholder="your.email@example.com"
-                      className="h-14 text-lg border-2 border-purple-200 focus:border-purple-500 rounded-xl transition-all duration-300 focus:ring-4 focus:ring-purple-500/20"
+                      className="h-14 text-lg border-2 border-slate-200 focus:border-purple-500 bg-white hover:bg-purple-50/50 rounded-xl transition-all duration-300 focus:ring-4 focus:ring-purple-500/20 placeholder:text-slate-400"
                     />
                   </div>
 
@@ -204,7 +204,7 @@ const Contact = () => {
                       value={formData.organization}
                       onChange={handleChange}
                       placeholder="Hospital, Pharmacy, Clinic, etc."
-                      className="h-14 text-lg border-2 border-purple-200 focus:border-purple-500 rounded-xl transition-all duration-300 focus:ring-4 focus:ring-purple-500/20"
+                      className="h-14 text-lg border-2 border-slate-200 focus:border-purple-500 bg-white hover:bg-purple-50/50 rounded-xl transition-all duration-300 focus:ring-4 focus:ring-purple-500/20 placeholder:text-slate-400"
                     />
                   </div>
 
@@ -220,7 +220,7 @@ const Contact = () => {
                       onChange={handleChange}
                       placeholder="Please describe your inquiry, including specific products of interest, quantity requirements, or partnership opportunities..."
                       rows={6}
-                      className="text-lg border-2 border-purple-200 focus:border-purple-500 rounded-xl transition-all duration-300 focus:ring-4 focus:ring-purple-500/20"
+                      className="text-lg border-2 border-slate-200 focus:border-purple-500 bg-white hover:bg-purple-50/50 rounded-xl transition-all duration-300 focus:ring-4 focus:ring-purple-500/20 placeholder:text-slate-400"
                     />
                   </div>
 
