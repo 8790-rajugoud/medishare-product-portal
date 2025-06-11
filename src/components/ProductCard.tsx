@@ -2,7 +2,7 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Star, Package, Users, Calendar, Shield, Thermometer, ChevronDown, ChevronUp } from "lucide-react";
+import { Star, Package, Shield, Thermometer, ChevronDown, ChevronUp } from "lucide-react";
 import { Product } from "@/data/products";
 import { useState } from "react";
 
@@ -30,7 +30,7 @@ const ProductCard = ({ product }: ProductCardProps) => {
 
   return (
     <Card 
-      className={`group relative overflow-hidden transition-all duration-500 hover:shadow-2xl hover:-translate-y-2 advanced-card cursor-pointer ${
+      className={`relative overflow-hidden transition-all duration-300 advanced-card cursor-pointer ${
         showDetails ? 'glow-blue-intense' : 'glow-blue'
       }`}
       onClick={handleCardClick}
@@ -52,7 +52,7 @@ const ProductCard = ({ product }: ProductCardProps) => {
       </div>
 
       {/* Click indicator */}
-      <div className="absolute top-1/2 right-4 transform -translate-y-1/2 z-10 bg-white/90 backdrop-blur-sm rounded-full p-2 shadow-lg group-hover:scale-110 transition-all duration-300">
+      <div className="absolute top-1/2 right-4 transform -translate-y-1/2 z-10 bg-white/90 backdrop-blur-sm rounded-full p-2 shadow-lg transition-all duration-300">
         {showDetails ? (
           <ChevronUp className="h-5 w-5 text-blue-600" />
         ) : (
@@ -61,13 +61,12 @@ const ProductCard = ({ product }: ProductCardProps) => {
       </div>
 
       <CardHeader className="p-4 relative">
-        <div className="aspect-square relative overflow-hidden rounded-xl bg-gradient-to-br from-gray-100 to-gray-200 group-hover:shadow-lg transition-all duration-500">
+        <div className="aspect-square relative overflow-hidden rounded-xl bg-gradient-to-br from-gray-100 to-gray-200">
           <img
             src={product.image}
             alt={product.name}
-            className="object-cover w-full h-full transition-transform duration-700 group-hover:scale-110"
+            className="object-cover w-full h-full"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
         </div>
 
         {/* Rating stars */}
@@ -91,7 +90,7 @@ const ProductCard = ({ product }: ProductCardProps) => {
         </div>
 
         <div>
-          <h3 className="font-bold text-lg mb-2 text-gray-900 group-hover:text-blue-600 transition-colors duration-300">
+          <h3 className="font-bold text-lg mb-2 text-gray-900">
             {product.name}
           </h3>
           <p className="text-gray-600 text-sm mb-2 line-clamp-2">{product.description}</p>
@@ -189,13 +188,6 @@ const ProductCard = ({ product }: ProductCardProps) => {
           </div>
         )}
       </CardFooter>
-
-      {/* Animated border gradient */}
-      <div className="absolute inset-0 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none">
-        <div className="absolute inset-0 rounded-lg bg-gradient-to-r from-blue-400 via-blue-500 to-blue-600 p-[2px]">
-          <div className="w-full h-full bg-white rounded-lg"></div>
-        </div>
-      </div>
     </Card>
   );
 };
